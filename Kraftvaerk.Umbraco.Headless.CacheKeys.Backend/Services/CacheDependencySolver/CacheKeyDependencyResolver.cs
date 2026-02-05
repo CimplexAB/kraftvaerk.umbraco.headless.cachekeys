@@ -16,11 +16,14 @@ public class CacheKeyDependencyResolver : ICacheKeyDependencyResolver
     private readonly IContentService _contentService;
 
     public CacheKeyDependencyResolver(
-        IRelationService relationService, IContentService contentService)
+        PickerDependencyResolver pickerResolver,
+        BlockDependencyResolver blockResolver,
+        RelationDependencyResolver relationResolver,
+        IContentService contentService)
     {
-        _pickerResolver = new PickerDependencyResolver();
-        _relationResolver = new RelationDependencyResolver(relationService, contentService);
-        _blockResolver = new BlockDependencyResolver(); // Pass self for recursion
+        _pickerResolver = pickerResolver;
+        _blockResolver = blockResolver;
+        _relationResolver = relationResolver;
         _contentService = contentService;
     }
 
