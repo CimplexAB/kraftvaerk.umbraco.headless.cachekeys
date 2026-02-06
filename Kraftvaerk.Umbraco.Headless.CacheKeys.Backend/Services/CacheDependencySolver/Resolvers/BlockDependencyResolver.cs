@@ -38,11 +38,11 @@ namespace Kraftvaerk.Umbraco.Headless.CacheKeys.Backend.Services.CacheDependency
             _contentTypeService = contentTypeService;
         }
 
-        public IEnumerable<string> GetBlockDependencies(IContent content)
+        public IEnumerable<string> GetBlockDependencies(IContent content, string? culture = null)
         {
             foreach (var property in content.Properties)
             {
-                var rawValue = property.GetValue()?.ToString();
+                var rawValue = property.GetValue(culture)?.ToString();
                 if (string.IsNullOrWhiteSpace(rawValue))
                     continue;
 
